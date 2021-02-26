@@ -7,6 +7,6 @@ public interface TagCRUD {
 	void insertTag(Tag tag);
 	Tag readTag(int id);
 	Tag updateTag(Tag tag);
-	Tag deleteTag(int id);
+	void deleteTag(int id);
 
 }

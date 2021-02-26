@@ -11,6 +11,7 @@ public class Topic {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String topic;
+	
 	public int getId() {
 		return id;
 	}

@@ -14,25 +14,26 @@ public class TagCRUDImpl implements TagCRUD{
 	@Override
 	public void insertTag(Tag tag) {
 		// TODO Auto-generated method stub
+		tagRepo.save(tag);
 		
 	}
 
 	@Override
 	public Tag readTag(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return tagRepo.findById(id).get();
 	}
 
 	@Override
 	public Tag updateTag(Tag tag) {
 		// TODO Auto-generated method stub
-		return null;
+		return tagRepo.save(tag);
 	}
 
 	@Override
-	public Tag deleteTag(int id) {
+	public void deleteTag(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		tagRepo.deleteById(id);
 	}
 
 }

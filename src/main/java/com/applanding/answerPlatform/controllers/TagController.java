@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.applanding.answerPlatform.entity.Company;
@@ -22,27 +23,32 @@ public class TagController {
 	TagCRUD tagService;
 	
 	@PostMapping("/insert")
-	public void insertTag(@RequestBody Tag tag)
+	@ResponseBody
+	public String insertTag(@RequestBody Tag tag)
 	{
-		
+		tagService.insertTag(tag);
+		return "Tag with ID: "+tag.getId()+" inserted successfully.";
 	}
 	
 	@GetMapping("/get/{id}")
 	public Tag getTag(@PathVariable int id)
 	{
-		return new Tag();
+		return tagService.readTag(id);
 	}
 	
 	@PutMapping("/update")
 	public Tag updateCompany(@RequestBody Tag tag)
 	{
-		return new Tag();
+		return tagService.updateTag(tag);
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public Tag deleteTag(@PathVariable int id)
+	@ResponseBody
+	public String deleteTag(@PathVariable int id)
 	{
-		return new Tag();
+		tagService.deleteTag(id);
+		return "Tag with ID: "+id+" deleted successfully.";
+		
 	}
 
 }

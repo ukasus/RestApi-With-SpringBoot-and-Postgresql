@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.applanding.answerPlatform.entity.Company;
@@ -22,27 +23,32 @@ public class TopicController {
 	TopicCRUD topicService;
 	
 	@PostMapping("/insert")
-	public void insertTopic(@RequestBody Topic topic)
+	@ResponseBody
+	public String insertTopic(@RequestBody Topic topic)
 	{
+		topicService.insertTopic(topic);
+		return "Topic with ID: "+topic.getId()+" inserted successfully.";
 		
 	}
 	
 	@GetMapping("/get/{id}")
 	public Topic getTopic(@PathVariable int id)
 	{
-		return new Topic();
+		return topicService.readTopic(id);
 	}
 	
 	@PutMapping("/update")
 	public Topic updateTopic(@RequestBody Topic topic)
 	{
-		return new Topic();
+		return topicService.updateTopic(topic);
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public Topic deleteTopic(@PathVariable int id)
+	@ResponseBody
+	public String deleteTopic(@PathVariable int id)
 	{
-		return new Topic();
+		topicService.deleteTopic(id);
+		return "Topic with ID: "+id+" deleted successfully.";
 	}
 
 }

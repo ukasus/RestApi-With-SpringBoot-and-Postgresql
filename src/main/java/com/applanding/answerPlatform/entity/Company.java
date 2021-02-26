@@ -11,7 +11,9 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
 	private String companyName;
+	
 	public int getId() {
 		return id;
 	}

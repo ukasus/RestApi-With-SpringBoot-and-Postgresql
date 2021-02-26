@@ -13,6 +13,8 @@ public class SubTopic {
 	private String subTopic;
 	@ManyToOne
 	private Topic topic;
+	
+	
 	public int getId() {
 		return id;
 	}

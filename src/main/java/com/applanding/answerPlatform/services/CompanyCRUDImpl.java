@@ -1,5 +1,7 @@
 package com.applanding.answerPlatform.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,24 +17,28 @@ public class CompanyCRUDImpl implements CompanyCRUD{
 	public void insertCompany(Company company) {
 		// TODO Auto-generated method stub
 		
+		companyRepo.save(company);
+		
 	}
 
 	@Override
 	public Company readCompany(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return companyRepo.findById(id).get();
 	}
 
 	@Override
 	public Company updateCompany(Company company) {
 		// TODO Auto-generated method stub
-		return null;
+		return companyRepo.save(company);
 	}
 
 	@Override
-	public Company deleteCompany(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteCompany(int id) {
+		
+		
+		companyRepo.deleteById(id);
+		
 	}
 
 }

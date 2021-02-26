@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.applanding.answerPlatform.entity.SubTopic;
-import com.applanding.answerPlatform.entity.Topic;
+
 import com.applanding.answerPlatform.repository.SubTopicRepo;
 
 @Service
@@ -14,27 +14,27 @@ public class SubTopicCRUDImpl implements SubTopicCRUD {
 	SubTopicRepo subTopicRepo;
 	
 	@Override
-	public void insertSubTopic(SubTopic subTopic) {
+	public SubTopic insertSubTopic(SubTopic subTopic) {
 		// TODO Auto-generated method stub
+		return subTopicRepo.save(subTopic);
 
 	}
 
 	@Override
-	public Topic readSubTopic(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public SubTopic readSubTopic(int id) {
+		
+		return subTopicRepo.findById(id).get();
 	}
 
 	@Override
-	public Topic updateSubTopic(SubTopic SubTopic) {
-		// TODO Auto-generated method stub
-		return null;
+	public SubTopic updateSubTopic(SubTopic subTopic) {
+		return subTopicRepo.save(subTopic);
 	}
 
 	@Override
-	public Topic deleteSubTopic(int id) {
+	public void deleteSubTopic(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		subTopicRepo.deleteById(id);
 	}
 
 }

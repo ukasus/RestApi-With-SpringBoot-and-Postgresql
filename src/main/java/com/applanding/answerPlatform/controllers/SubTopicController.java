@@ -8,40 +8,52 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.applanding.answerPlatform.entity.Company;
+import com.applanding.answerPlatform.dto.SubTopicDto;
 import com.applanding.answerPlatform.entity.SubTopic;
+import com.applanding.answerPlatform.entity.Topic;
 import com.applanding.answerPlatform.services.SubTopicCRUD;
+import com.applanding.answerPlatform.services.TopicCRUD;
 
 @RestController
 @RequestMapping("/subTopic")
 public class SubTopicController {
 	@Autowired
 	SubTopicCRUD subTopicService;
+	@Autowired
+	TopicCRUD topicService;
 	
 	@PostMapping("/insert")
-	public void insertSubTopic(@RequestBody SubTopic subTopic)
+	
+	public SubTopic insertSubTopic(@RequestBody SubTopicDto subTopicDto)
 	{
-		
+		SubTopic subTopic=new SubTopic();
+		Topic topic =topicService.readTopic(subTopicDto.getTopicId());
+		subTopic.setSubTopic(subTopicDto.getSubTopic());
+		subTopic.setTopic(topic);
+		return subTopicService.insertSubTopic(subTopic);
 	}
 	
 	@GetMapping("/get/{id}")
 	public SubTopic getSubTopic(@PathVariable int id)
 	{
-		return new SubTopic();
+		return subTopicService.readSubTopic(id);
 	}
 	
 	@PutMapping("/update")
 	public SubTopic updateSubTopic(@RequestBody SubTopic subTopic)
 	{
-		return new SubTopic();
+		return subTopicService.updateSubTopic(subTopic);
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public SubTopic deleteSubTopic(@PathVariable int id)
+	@ResponseBody
+	public String deleteSubTopic(@PathVariable int id)
 	{
-		return new SubTopic();
+		subTopicService.deleteSubTopic(id);
+		return "SubTopic with ID: "+id+" deleted successfully.";
 	}
 
 }

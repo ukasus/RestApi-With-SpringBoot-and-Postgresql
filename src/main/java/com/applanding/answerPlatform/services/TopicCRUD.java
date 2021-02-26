@@ -7,6 +7,6 @@ public interface TopicCRUD {
 	void insertTopic(Topic topic);
 	Topic readTopic(int id);
 	Topic updateTopic(Topic topic);
-	Topic deleteTopic(int id);
+	void deleteTopic(int id);
 
 }

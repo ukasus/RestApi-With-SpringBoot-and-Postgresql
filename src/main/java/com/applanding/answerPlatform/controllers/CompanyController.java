@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.applanding.answerPlatform.entity.Company;
@@ -21,27 +22,35 @@ public class CompanyController {
 	CompanyCRUD companyService;
 	
 	@PostMapping("/insert")
-	public void insertCompany(@RequestBody Company company)
+	@ResponseBody
+	public String insertCompany(@RequestBody Company company)
 	{
-		
+		companyService.insertCompany(company);
+		return "Company with Name: "+company.getCompanyName()+" inserted successfully.";
 	}
 	
 	@GetMapping("/get/{id}")
-	public Company getCompany(@PathVariable int id)
+	@ResponseBody
+	public Company getCompany(@PathVariable("id") int id)
 	{
-		return new Company();
+//		System.out.println(id);
+//		Company company=companyService.readCompany(id);
+//		System.out.println(company.getCompanyName());
+		return companyService.readCompany(id);
 	}
 	
 	@PutMapping("/update")
 	public Company updateCompany(@RequestBody Company company)
 	{
-		return new Company();
+		return companyService.updateCompany(company);
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public Company deleteCompany(@PathVariable int id)
+	@ResponseBody
+	public String deleteCompany(@PathVariable int id)
 	{
-		return new Company();
+		companyService.deleteCompany(id);
+		return "Company with ID: "+id+" deleted successfully.";
 	}
 
 }

@@ -14,25 +14,26 @@ public class TopicCRUDImpl implements TopicCRUD{
 	@Override
 	public void insertTopic(Topic topic) {
 		// TODO Auto-generated method stub
+		topicRepo.save(topic);
 		
 	}
 
 	@Override
 	public Topic readTopic(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return topicRepo.findById(id).get();
 	}
 
 	@Override
 	public Topic updateTopic(Topic topic) {
 		// TODO Auto-generated method stub
-		return null;
+		return topicRepo.save(topic);
 	}
 
 	@Override
-	public Topic deleteTopic(int id) {
+	public void deleteTopic(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		topicRepo.deleteById(id);
 	}
 
 }

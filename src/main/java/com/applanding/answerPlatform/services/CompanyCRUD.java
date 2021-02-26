@@ -6,7 +6,7 @@ public interface CompanyCRUD {
 	void insertCompany(Company company);
 	Company readCompany(int id);
 	Company updateCompany(Company company);
-	Company deleteCompany(int id);
+	void deleteCompany(int id);
 	
 
 }
