@@ -6,9 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+
+
+
 
 @Entity
 public class Question {
@@ -16,14 +21,23 @@ public class Question {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	
+	private String question;
 	@ManyToOne
 	private Company company;
+	
+	
 	@OneToOne
 	private SubTopic subTopic;
-	@OneToMany
+	@ManyToMany
 	private List<Tag> tag;
+	
+	
 	@ManyToOne
-	private User user;
+	private UserData user;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -48,11 +62,17 @@ public class Question {
 	public void setTag(List<Tag> tag) {
 		this.tag = tag;
 	}
-	public User getUser() {
+	public UserData getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserData user) {
 		this.user = user;
+	}
+	public String getQuestion() {
+		return question;
+	}
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 	
 	

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.applanding.answerPlatform.dto.SubTopicDto;
+import com.applanding.answerPlatform.dto.SubTopicInputDTO;
 import com.applanding.answerPlatform.entity.SubTopic;
 import com.applanding.answerPlatform.entity.Topic;
 import com.applanding.answerPlatform.services.SubTopicCRUD;
@@ -27,7 +27,7 @@ public class SubTopicController {
 	
 	@PostMapping("/insert")
 	
-	public SubTopic insertSubTopic(@RequestBody SubTopicDto subTopicDto)
+	public SubTopic insertSubTopic(@RequestBody SubTopicInputDTO subTopicDto)
 	{
 		SubTopic subTopic=new SubTopic();
 		Topic topic =topicService.readTopic(subTopicDto.getTopicId());

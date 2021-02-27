@@ -1,8 +1,9 @@
 package com.applanding.answerPlatform.dto;
 
-public class SubTopicDto {
+public class SubTopicInputDTO {
 	private String subTopic;
 	private int topicId;
+	
 	public String getSubTopic() {
 		return subTopic;
 	}
