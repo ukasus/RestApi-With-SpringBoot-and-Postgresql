@@ -24,8 +24,8 @@ public class Question {
 	
 	
 	private String question;
-	@ManyToOne
-	private Company company;
+	@ManyToMany
+	private List<Company> company;
 	
 	
 	@OneToOne
@@ -44,10 +44,10 @@ public class Question {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Company getCompany() {
+	public List<Company> getCompany() {
 		return company;
 	}
-	public void setCompany(Company company) {
+	public void setCompany(List<Company> company) {
 		this.company = company;
 	}
 	public SubTopic getSubTopic() {

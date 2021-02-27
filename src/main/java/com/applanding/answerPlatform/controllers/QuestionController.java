@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.applanding.answerPlatform.dto.QuestionInputDTO;
+import com.applanding.answerPlatform.entity.Company;
 import com.applanding.answerPlatform.entity.Question;
 import com.applanding.answerPlatform.entity.Tag;
 import com.applanding.answerPlatform.entity.Topic;
@@ -47,7 +48,12 @@ public class QuestionController {
 		Question question=new Question();
 		question.setQuestion(questionDTO.getQuestionText());
 		if(questionDTO.getCompanyId()!=0)
-		question.setCompany(companyService.readCompany(questionDTO.getCompanyId()));
+		{
+			List<Company> list=new ArrayList<>();
+			list.add(companyService.readCompany(questionDTO.getCompanyId()));
+			question.setCompany(list);
+		}
+		
 		System.out.println("SubTopicId: "+questionDTO.getSubTopicId());
 		question.setSubTopic(subTopicService.readSubTopic(questionDTO.getSubTopicId()));
 		tags.clear();
