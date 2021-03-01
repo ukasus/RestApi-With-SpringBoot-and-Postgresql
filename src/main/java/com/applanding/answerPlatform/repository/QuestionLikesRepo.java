@@ -1,5 +1,9 @@
 package com.applanding.answerPlatform.repository;
 
-public interface QuestionLikesRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.applanding.answerPlatform.entity.QuestionLikes;
+
+public interface QuestionLikesRepo extends JpaRepository<QuestionLikes, Integer>{
 
 }

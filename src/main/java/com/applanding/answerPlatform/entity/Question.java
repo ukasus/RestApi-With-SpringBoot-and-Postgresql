@@ -6,10 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -19,23 +22,36 @@ import javax.persistence.OneToOne;
 public class Question {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int id;
 	
 	
 	private String question;
-	@ManyToMany
+	@OneToMany
+	@JoinColumn(name="companyID")
 	private List<Company> company;
 	
 	
 	@OneToOne
+	@JoinColumn(name="subTopicID")
+	
 	private SubTopic subTopic;
+	
 	@ManyToMany
+	@JoinColumn(name="tagID")
 	private List<Tag> tag;
 	
 	
 	@ManyToOne
+	@JoinColumn(name="userID")
 	private UserData user;
+	
+	@OneToMany(mappedBy="question")
+	private List<Answer> answers;
+	
+	@OneToMany(mappedBy="question")
+	private List<QuestionLikes> questionLikes;
 	
 	
 	public int getId() {
@@ -73,6 +89,18 @@ public class Question {
 	}
 	public void setQuestion(String question) {
 		this.question = question;
+	}
+	public List<Answer> getAnswers() {
+		return answers;
+	}
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+	public List<QuestionLikes> getQuestionLikes() {
+		return questionLikes;
+	}
+	public void setQuestionLikes(List<QuestionLikes> questionLikes) {
+		this.questionLikes = questionLikes;
 	}
 	
 	

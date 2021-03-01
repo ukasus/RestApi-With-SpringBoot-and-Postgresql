@@ -14,11 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.applanding.answerPlatform.dto.AnswerLikesInputDTO;
 import com.applanding.answerPlatform.dto.QuestionInputDTO;
+import com.applanding.answerPlatform.dto.QuestionLikesInputDTO;
+import com.applanding.answerPlatform.entity.AnswerLikes;
 import com.applanding.answerPlatform.entity.Company;
 import com.applanding.answerPlatform.entity.Question;
+import com.applanding.answerPlatform.entity.QuestionLikes;
 import com.applanding.answerPlatform.entity.Tag;
 import com.applanding.answerPlatform.entity.Topic;
+import com.applanding.answerPlatform.repository.QuestionLikesRepo;
 import com.applanding.answerPlatform.repository.QuestionRepo;
 import com.applanding.answerPlatform.repository.UserRepo;
 import com.applanding.answerPlatform.services.CompanyCRUD;
@@ -31,6 +36,8 @@ public class QuestionController {
 	
 	@Autowired
 	QuestionRepo questionRepo;
+	@Autowired
+	QuestionLikesRepo questionLikeRepo;
 	@Autowired
 	CompanyCRUD companyService;
 	@Autowired 
@@ -70,6 +77,17 @@ public class QuestionController {
 		
 		return questionRepo.save(question).getId();
 		
+	}
+	
+	@PostMapping("/inserQuestionLike")
+	@ResponseBody
+	public String insertQuestionLike(@RequestBody QuestionLikesInputDTO questionLikeInput)
+	{
+		QuestionLikes questionLike=new QuestionLikes();
+		questionLike.setQuestion(questionRepo.findById(questionLikeInput.getQuestionId()).get());
+		questionLike.setUser(userRepo.findById(questionLikeInput.getUserId()).get());
+		questionLikeRepo.save(questionLike);
+		return "Success";
 	}
 	
 	@GetMapping("/get/{id}")
